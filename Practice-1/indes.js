@@ -7,12 +7,13 @@
     properties  = {
         bgColor             : 'rgba(17,17,19,1)',
         particleColor       : 'rgba(255,40,40,1)',
-        particleRadius      : 3,
-        particleCount       : 60,
-        particleMaxVelocity : 0.5,
+        particleRadius      : 2.5,
+        particleCount       : 50,
+        particleMaxVelocity : 0.3,
+        lineLength          : 200,
     }
 
-    document.querySelector('body').appendChild(canvas);
+    document.querySelector('body').appendChild( canvas );
 
     window.onresize = function(){
         w = canvas.width    = innerWidth
@@ -28,6 +29,9 @@
         }
 
         position(){
+            // if particle goes over screen border , reverse x position
+            this.x + this.velocityX > w && this.velocityX > 0 || this.x + this.velocityX<0 && this.velocityX <0? this.velocityX*= -1 : this.velocityX*= 1;
+            this.y + this.velocityY > h && this.velocityY > 0 || this.y + this.velocityY<0 && this.velocityY <0? this.velocityY*= -1 : this.velocityY*= 1;
             this.x += this.velocityX;
             this.y += this.velocityY;
         }
@@ -43,24 +47,38 @@
 
     function reDrawBackground(){
         ctx.fillStyle = properties.bgColor;
-        ctx.fillRect(0,0,w,h);
+        ctx.fillRect(0, 0, w, h);
     }
 
+    function drawLines(){
+        var x1, y1, x2, y2, length, opacity;
+        for( var i in particles ){
+            for( var j in particles ){
+                x1 = particles[i].x;
+                y1 = particles[i].y;
+                x2 = particles[j].x;
+                y2 = particles[j].y;
+                length = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1,2));
+            }
+        }
+
+    }
     function reDrawParticles(){
-        for( var i in particles){
+        for( var i in particles ){
             particles[i].reDraw();
             particles[i].position();
         }
     }
+
     function loop(){
         reDrawBackground();
         reDrawParticles();
-        requestAnimationFrame(loop);
+        requestAnimationFrame( loop );
     }
 
     function init(){
-        for( var i = 0; i< properties.particleCount; i++){
-            particles.push(new Particle);
+        for( var i = 0; i < properties.particleCount; i++ ){
+            particles.push( new Particle );
         }
         loop();
     }
