@@ -5,10 +5,11 @@
     h       = canvas.height = innerHeight,
     particles   = [],
     properties  = {
-        bgColor         : 'rgba(17,17,19,1)',
-        particleColor   : 'rgba(255,40,40,1)',
-        particleRadius  : 3,
-        particleCount   : 60,
+        bgColor             : 'rgba(17,17,19,1)',
+        particleColor       : 'rgba(255,40,40,1)',
+        particleRadius      : 3,
+        particleCount       : 60,
+        particleMaxVelocity : 0.5,
     }
 
     document.querySelector('body').appendChild(canvas);
@@ -22,6 +23,13 @@
         constructor(){
             this.x = Math.random() * w;
             this.y = Math.random() * h;
+            this.velocityX = Math.random() * (properties.particleMaxVelocity*2)-properties.particleMaxVelocity;
+            this.velocityY = Math.random() * (properties.particleMaxVelocity*2)-properties.particleMaxVelocity;
+        }
+
+        position(){
+            this.x += this.velocityX;
+            this.y += this.velocityY;
         }
 
         reDraw(){
@@ -41,6 +49,7 @@
     function reDrawParticles(){
         for( var i in particles){
             particles[i].reDraw();
+            particles[i].position();
         }
     }
     function loop(){
@@ -57,4 +66,5 @@
     }
 
     init();
+    
 })();
