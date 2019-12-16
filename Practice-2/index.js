@@ -1,8 +1,8 @@
-// (function(){
+(function(){
     const props = {
-        spaceDiameter   : 80,
-        dotDiameter     : 40,
-        waveLength      : 100,
+        spaceDiameter   : 20,
+        dotDiameter     : 10,
+        waveLength      : 50,
         velocity        : 0.01,
         direction       : 1,
     }
@@ -15,6 +15,7 @@
     let dotsList;
 
     canvas.style.background = 'rgba(17,17,23,1)';
+    canvas.style.backgroundImage = 'linear-gradient(141deg, #9fb8ad 0%, #1fc8db 51%, #2cb5e8 75%)';
     document.querySelector('body').appendChild(canvas);
 
     window.onresize = function(){
@@ -46,7 +47,7 @@
             // x, y, radius , startAngle 0 radius , endAngle 2*PI radius , (anticlockwise:bool)
             ctx.arc(this.x, this.y, r, 0, Math.PI * 2, false); 
             ctx.closePath();
-            ctx.fillStyle = 'rgba(255, 0, 0, 1)';
+            ctx.fillStyle = 'rgba(210, 210, 210, 1)';
             ctx.fill();
         }
     }
@@ -88,4 +89,4 @@
         let dy = h /2- y;
         return Math.sqrt((dx * dx) + (dy * dy));
     }
-// })()
+})()
