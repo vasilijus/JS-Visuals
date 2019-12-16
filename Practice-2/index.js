@@ -1,6 +1,10 @@
 // (function(){
     const props = {
         spaceDiameter   : 80,
+        dotDiameter     : 40,
+        waveLength      : 100,
+        velocity        : 0.01,
+        direction       : 1,
     }
     var canvas = document.createElement('canvas');
     var ctx = canvas.getContext('2d');
@@ -17,19 +21,30 @@
         w = canvas.width    = innerWidth;
         h = canvas.height   = innerHeight;
         init();
-        loop();
     }
 
     class Dot{
         constructor(x,y){
             this.x = x;
             this.y = y;
+            this.radius = props.dotDiameter / 2;
+            this.scale = getDistance(x,y)/ props.waveLength;
+        }
+
+        update() {
+            this.resize();
+            this.draw();
+        }
+
+        resize() {
+            this.scale = this.scale - props.velocity * props.direction;
         }
 
         draw() {
+            let r = this.radius * (1 - Math.abs(Math.sin(this.scale)) );
             ctx.beginPath();
             // x, y, radius , startAngle 0 radius , endAngle 2*PI radius , (anticlockwise:bool)
-            ctx.arc(this.x, this.y, 40, 0, Math.PI * 2, false); 
+            ctx.arc(this.x, this.y, r, 0, Math.PI * 2, false); 
             ctx.closePath();
             ctx.fillStyle = 'rgba(255, 0, 0, 1)';
             ctx.fill();
@@ -60,8 +75,17 @@
 
     loop();
     function loop(){
+        ctx.clearRect(0,0,w,h);
         for(let a in dotsList){
-            dotsList[a].draw();
+            dotsList[a].update();
         }
+
+        requestAnimationFrame(loop);
+    }
+
+    function getDistance(x , y){
+        let dx = w /2 -x; // дельта икс и игрик
+        let dy = h /2- y;
+        return Math.sqrt((dx * dx) + (dy * dy));
     }
 // })()
