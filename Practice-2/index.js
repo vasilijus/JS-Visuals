@@ -1,4 +1,7 @@
 (function(){
+    const props = {
+        spaceDiameter   : 80,
+    }
     var canvas = document.createElement('canvas');
     var ctx = canvas.getContext('2d');
 
@@ -6,25 +9,31 @@
     let h = canvas.height   = innerHeight;
 
     let dotsList;
-    canvas.style.background = 'rgba(17,17,23,1)';
 
+    canvas.style.background = 'rgba(17,17,23,1)';
     document.querySelector('body').appendChild(canvas);
 
     class Dot{
-        constructor(){
-            this.x = w / 2;
-            this.h = h / 2;
+        constructor(x,y){
+            this.x = x;
+            this.h = y;
         }
 
         draw() {
             ctx.beginPath();
-            ctx.arc(this.x, this.y, 30, 0, Math.PI * 2, false); // x, y, radius , startAngle 0 radius , endAngle 2*PI radius , (anticlockwise:bool)
+            // x, y, radius , startAngle 0 radius , endAngle 2*PI radius , (anticlockwise:bool)
+            ctx.arc(w/2, h/2, 30, 0, Math.PI * 2, false); 
             ctx.closePath();
-            ctx.fillStyle = 'red';
+            ctx.fillStyle = 'rgba(255, 0, 0, 1)';
             ctx.fill();
         }
     }
     
-    dotsList = [new Dot()];
-    dotsList[0].draw();
+
+    init();
+    
+    function init(){
+        dotsList = [new Dot(0, 0)];
+        dotsList[0].draw();
+    }
 })()
