@@ -10,7 +10,7 @@
         particleRadius      : 2.5,
         particleCount       : 50,
         particleMaxVelocity : 0.3,
-        lineLength          : 200,
+        lineLength          : 80,
     }
 
     document.querySelector('body').appendChild( canvas );
@@ -59,6 +59,15 @@
                 x2 = particles[j].x;
                 y2 = particles[j].y;
                 length = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1,2));
+                if( length < properties.lineLength ){
+                    ctx.lineWidth = '0,5';
+                    ctx.strokeStyle = 'rgba(255,40,40,1)';
+                    ctx.beginPath();
+                    ctx.moveTo(x1,y1);
+                    ctx.lineTo(x2,y2);
+                    ctx.closePath();
+                    ctx.stroke();
+                }
             }
         }
 
@@ -73,6 +82,7 @@
     function loop(){
         reDrawBackground();
         reDrawParticles();
+        drawLines();
         requestAnimationFrame( loop );
     }
 
