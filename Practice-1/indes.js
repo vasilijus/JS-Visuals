@@ -11,6 +11,7 @@
         particleCount       : 50,
         particleMaxVelocity : 0.3,
         lineLength          : 80,
+        particleLife        : 6,
     }
 
     document.querySelector('body').appendChild( canvas );
@@ -26,6 +27,7 @@
             this.y = Math.random() * h;
             this.velocityX = Math.random() * (properties.particleMaxVelocity*2)-properties.particleMaxVelocity;
             this.velocityY = Math.random() * (properties.particleMaxVelocity*2)-properties.particleMaxVelocity;
+            this.life = Math.random()*properties.particleLife*60;
         }
 
         position(){
@@ -42,6 +44,16 @@
             ctx.closePath();
             ctx.fillStyle = properties.particleColor;
             ctx.fill();
+        }
+        reCalculateLife(){
+            if( this.life < 1 ){
+                this.x = Math.random() * w;
+                this.y = Math.random() * h;
+                this.velocityX = Math.random() * (properties.particleMaxVelocity*2)-properties.particleMaxVelocity;
+                this.velocityY = Math.random() * (properties.particleMaxVelocity*2)-properties.particleMaxVelocity;
+                this.life = Math.random()*properties.particleLife*60;
+            }
+            this.life--;
         }
     }
 
@@ -60,8 +72,9 @@
                 y2 = particles[j].y;
                 length = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1,2));
                 if( length < properties.lineLength ){
+                    opacity = 1 - length/properties.lineLength;
                     ctx.lineWidth = '0,5';
-                    ctx.strokeStyle = 'rgba(255,40,40,1)';
+                    ctx.strokeStyle = 'rgba(255,40,40,'+opacity+')';
                     ctx.beginPath();
                     ctx.moveTo(x1,y1);
                     ctx.lineTo(x2,y2);
@@ -74,6 +87,7 @@
     }
     function reDrawParticles(){
         for( var i in particles ){
+            particles[i].reCalculateLife();
             particles[i].reDraw();
             particles[i].position();
         }
