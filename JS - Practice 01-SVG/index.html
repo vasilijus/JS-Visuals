@@ -9,32 +9,16 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.3/TweenMax.min.js"></script>
 </head>
 <body>
-        <p>Hover me</p>
-    <!--  Flying Objects    -->
-    <svg id="back" viewbox="0 0 1000 1000">
-        <!-- <circle id="orange-circle" r="30" cx="-70" cy="50" fill="orange" />
-        <rect id="blue-rectangle" width="50" height="50" x="-55" y="200" fill="#0099cc"></rect> -->
-        <animate 
-                    xlink:href="#orange-circle"
-                    attributeName="cx"
-                    from="-50"           to="1050"            dur="9s"
-                    repeat="infinite"
-                    fill="freeze" 
-                    id="circ-anim"/>
-        <animate 
-                    xlink:href="#blue-rectangle"
-                    attributeName="x" 
-                    from="-50"           to="1050"            dur="25s"
-                    begin="circ-anim.begin + 2s"
-                    fill="freeze" 
-                    id="rect-anim"/>
 
-        <path id="motionPath" fill="none" stroke="#000" stroke-miterlimit="10" d="M 50 500 C 150 400 350 350 500 350 C 650 350 850 400 950 500" />
+    <!--  Flying Objects    -->
+    <svg id="back" viewbox="0 0 800 600">
+        <!-- <path id="motionPath" fill="none" stroke="#000" stroke-miterlimit="10" d="M 50 500 C 150 400 350 350 500 350 C 650 350 850 400 950 500" /> -->
+        <path id="motionPath" d="M0 0 " />
         <circle id="path-circle" r="20" cx="50" cy="50" fill="tomato" />
-        <animateMotion xlink:href="#path-circle"
+        <!-- <animateMotion xlink:href="#path-circle"
                         dur="10" fill="freeze" begin="0s; 5s" repeatCount="2">
             <mpath xlink:href="#motionPath" />
-        </animateMotion>
+        </animateMotion> -->
     </svg>
      <!--  BLOB  -->
     <svg id="svg" viewBox="0 0 1000 1000">  
@@ -44,8 +28,8 @@
         </clipPath>
     </svg>
      
-    <!-- <script src="./sub.js"></script> -->
-    <script src="./main.js"></script>
+    <script src="./sub.js"></script>
+    <!-- <script src="./main.js"></script> -->
      
 
 </body>

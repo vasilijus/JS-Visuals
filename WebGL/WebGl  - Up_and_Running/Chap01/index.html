@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Hello</h2>
+    <canvas id="can"></canvas>
+
+    <script>
+        var canvas=document.getElementById('can');
+
+        function initWebGL(canvas) {
+            var gl;
+            try
+            {
+                gl = canvas.getContext('experimental-webgl');
+            }
+            catch (e)
+            {
+                var msg = 'Error creating WebGL!: ' + e.toString();
+                alert(msg);
+                throw Error(msg);
+            }
+            return gl;
+        }
+        initWebGL(canvas);
+    </script>
+</body>
+</html>
