@@ -1,34 +1,34 @@
 const hoverItem = document.querySelector('p')
-var ct = 0;
+// var ct = 0;
 
 const blob1 = createBlob({
     element: document.querySelector('#blob'),
-    numPoints: 8,
+    numPoints: 11,
     centerX: 500,
     centerY: 500,
-    minRadius: 400,
-    maxRadius: 455,
+    minRadius: 450,
+    maxRadius: 505,
     minDuration: 1,
     maxDuration: 2
 })
 
-hoverItem.addEventListener('mouseenter', () => {
+// hoverItem.addEventListener('mouseenter', () => {
   TweenMax.to(blob1.tl, 0.3, { 
     timeScale: 1,
     onStart() {
       blob1.tl.play()
     }
   });
-});
+// });
 
-hoverItem.addEventListener('mouseleave', () => {
-  TweenMax.to(blob1.tl, 2, { 
-    timeScale: 0,
-    onComplete() {
-      blob1.tl.pause()
-    }
-  });
-});
+// hoverItem.addEventListener('mouseleave', () => {
+//   TweenMax.to(blob1.tl, 2, { 
+//     timeScale: 0,
+//     onComplete() {
+//       blob1.tl.pause()
+//     }
+//   });
+// });
 
 function createBlob(options) {
     const points = []
@@ -69,7 +69,7 @@ function createBlob(options) {
     update()
 
     function update() {
-      console.log("UPDATE", ct++)
+    //   console.log("UPDATE", ct++)
         path.setAttribute('d', cardinal(points, true, 1))
     }
 
