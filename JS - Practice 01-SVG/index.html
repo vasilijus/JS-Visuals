@@ -9,43 +9,27 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.3/TweenMax.min.js"></script>
 </head>
 <body>
-        <!-- <p>Hover me</p> -->
-    <!--  Flying Objects    -->
-    <svg id="back" viewbox="0 0 1000 1000">
-        <!-- <circle id="orange-circle" r="30" cx="-70" cy="50" fill="orange" />
-        <rect id="blue-rectangle" width="50" height="50" x="-55" y="200" fill="#0099cc"></rect> -->
-        <!-- <animate 
-                    xlink:href="#orange-circle"
-                    attributeName="cx"
-                    from="-50"           to="1050"            dur="9s"
-                    repeat="infinite"
-                    fill="freeze" 
-                    id="circ-anim"/>
-        <animate 
-                    xlink:href="#blue-rectangle"
-                    attributeName="x" 
-                    from="-50"           to="1050"            dur="25s"
-                    begin="circ-anim.begin + 2s"
-                    fill="freeze" 
-                    id="rect-anim"/> -->
 
-        <!-- <path id="motionPath" fill="none" stroke="#000" stroke-miterlimit="10" d="M 50 500 C 150 400 350 350 500 350 C 650 350 850 400 950 500" />
-        <circle id="path-circle" r="20" cx="50" cy="50" fill="tomato" />
-        <animateMotion xlink:href="#path-circle"
-                        dur="10" fill="freeze" begin="0s; 5s" repeatCount="2">
-            <mpath xlink:href="#motionPath" />
-        </animateMotion> -->
+    <!--  Flying Objects    -->
+    <!-- <svg id="back" viewbox="0 0 800 600"> -->
+    <svg id="back" >
+
+        <circle id="p1" class="spot" cx="200" cy="50" r="4"></circle>
+        <circle id="p2" class="spot" cx="100" cy="100" r="4"></circle>
+        <circle id="cp" class="spot2" cx="0" cy="0" r="4"></circle>
+        <path id="curve" d="M0 0" stroke="green" stroke-width="4" stroke-linecap="round" fill="transparent"></path>
+        
+        <circle id="circle" r="20" cx="50" cy="50" fill="tomato" />
+        <animateMotion xlink:href="#circle"
+                        dur="10" fill="freeze" begin="0s" repeatCount="infinite">
+            <mpath xlink:href="#curve" />
+        </animateMotion>
+
     </svg>
-     <!--  BLOB  -->
-    <svg id="svg" viewBox="0 0 1000 1000">  
-        <image x="0" y="0" width="100%" height="100%" xlink:href="https://images.unsplash.com/photo-1511804472014-fa7b871cd6a9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&h=1350&q=80" clip-path="url(#blobmasking)" />
-        <clipPath id="blobmasking">
-            <path id="blob"></path>
-        </clipPath>
-    </svg>
+
      
-    <!-- <script src="./sub.js"></script> -->
-    <script src="./main.js"></script>
+    <script src="./sub.js"></script>
+    <!-- <script src="./main.js"></script> -->
      
 
 </body>
