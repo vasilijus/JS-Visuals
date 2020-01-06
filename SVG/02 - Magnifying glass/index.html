@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+</head>
+<body>
+    <p>svg</p>
+    <div class="main" style="height: 400px">
+            <input type="text" id="textinput">
+
+        <svg class="magnifier" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 34">
+            <circle class="cls-1" r="10" cx="12" cy="12" fill="#fff" stroke="black" />
+            <line class="cls-1" x1="20" y1="20" x2="33" y2="33" stroke="black" />
+        </svg> 
+    </div>
+    <style>
+        .magnifier { position: absolute; left: 1vw; top: 5vh; }
+        .magnifier line { transform: rotate(0deg) translateY(0px); }
+        .magnifier circle { transform: scale(1); }
+        .magnifier, input { width: 400px; }
+        input {font-size: 35px; padding-left: 35px; background: none; cursor: pointer; box-shadow: none; border: none; outline: none;}
+        .open .magnifier line {
+            transform: rotate(-2.5deg) translateY(14px);
+        }
+        .open .magnifier circle {
+            transform: scale(0.5);
+        }
+
+    </style>
+    <script>
+        $( document ).ready(function(){
+            $(".main").on('click', function() {
+                var magLine = $(this).find('.magnifier line'),
+                    mainInput= $(this).find('input');
+                if( $(this).hasClass('open') ) {
+                    $(this).removeClass('open');
+                    magLine.attr("x2", 33.1);
+                    mainInput.blur();
+                    mainInput.focus();
+                } else {
+                    $(this).addClass('open');
+                }
+            })
+        })
+    </script>
+</body>
+</html>
