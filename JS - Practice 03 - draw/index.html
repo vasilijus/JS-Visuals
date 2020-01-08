@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body style="background:purple;">
+    <h1>Canvas Crash Course</h1>
+    <canvas id="canvas" height="600" width="800"></canvas>
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        console.log(ctx)
+        // fill rect()
+        ctx.fillStyle = 'red';
+        ctx.fillRect(20, 20, 150, 120);
+        ctx.fillStyle = 'pink';
+        ctx.fillRect(200, 20, 150, 120);
+
+        // stroke rect()
+        ctx.lineWidth = 5;
+        ctx.strokeStyle = 'green';
+        ctx.strokeRect(50, 160, 150, 120);
+
+        // fillText()
+        ctx.fillStyle = 'green';
+        ctx.font = '25px Arial';
+        ctx.fillText('Canvas Text', 360, 50);
+    </script>
+</body>
+</html>
