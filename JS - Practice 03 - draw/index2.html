@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body style="background:purple;">
+    <a href="./index.html">
+        <input type="button" value="Page 1" onclick="windows.location = 'index2.html'" />
+    </a>
+    <a href="./smile.html">
+        <input type="button" value="Smile" onclick="windows.location = 'index2.html'" />
+    </a>
+    <h1>Canvas Crash Course</h1>
+    <canvas id="canvas" height="600" width="800"></canvas>
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        
+        ctx.beginPath()
+        ctx.moveTo(50,50);
+        ctx.lineTo(150,50);
+        ctx.lineTo(100,150);
+        ctx.fillStyle = "red"
+        ctx.fill();
+        // ctx.closePath();
+
+        ctx.beginPath();
+        ctx.moveTo(200, 50);
+        ctx.lineTo(150,150);
+        ctx.lineTo(250,150);
+        ctx.lineTo(200,50);
+        // ctx.closePath();
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.moveTo(250,50);
+        ctx.lineTo(350,50)
+        ctx.lineTo(300,150);
+        ctx.lineTo(250,50);
+        ctx.strokeStyle = 'pink';
+        ctx.closePath();
+        ctx.stroke();
+
+        // Rectangle
+        ctx.beginPath()
+        ctx.rect(150,200, 100,100);
+        ctx.fillStyle = 'teal';
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.arc(350,250, 50,0, Math.PI * 2);
+        ctx.fillStyle ='pink';
+        ctx.fill();
+    </script>
+</body>
+</html>
