@@ -10,7 +10,7 @@
     <a href="./index.html">
         <input type="button" value="Page 1" />
     </a>
-    <a href="./back.html">
+    <a href="./index2.html">
         <input type="button" value="Back" onclick="windows.location = 'index2.html'" />
     </a>
     <h1>Canvas Crash Course</h1>
@@ -20,31 +20,47 @@
         const ctx = camvas.getContext('2d')
 
         var w = window.innerWidth / 2, h = window.innerHeight / 2;
-
+        // head
         ctx.beginPath()
         ctx.arc( w, h , 200, 0, Math.PI *2 );
         ctx.strokeStyle = 'red'
         ctx.stroke();
-
+        // smile
         ctx.beginPath()
         ctx.arc(w, h+20, 120, .3 , Math.PI );
-        ctx.strokeStyle = 'red';
+        ctx.strokeStyle = 'pink';
         ctx.stroke();
-
+        // nose
         ctx.beginPath();
         ctx.arc(w, h , 20, 0 , Math.PI *2 );
         ctx.strokeStyle= 'red';
         ctx.stroke();
-
+        // left eye
         ctx.beginPath()
-        ctx.arc(w-100,h-80, 20, 0, Math.PI *2);
-        ctx.strokeStyle = 'red';
+        ctx.arc(w-100,h-60, 20, 0, Math.PI *2);
+        ctx.strokeStyle = 'pink';
         ctx.stroke();
-
+        // left eye 
         ctx.beginPath()
-        ctx.arc(w+100, h-80, 20, 0, Math.PI*2);
-        ctx.strokeStyle = 'red'
+        ctx.arc(w+100, h-60, 20, 0, Math.PI*2);
+        ctx.strokeStyle = 'pink'
         ctx.stroke();
+        // left brow
+        ctx.beginPath();
+        ctx.moveTo(w-120,h-80);
+        ctx.quadraticCurveTo(w-110,h-110,w-80,h-80);
+        ctx.strokeStyle = 'brown'
+        ctx.lineWidth= 3;
+        ctx.stroke();
+        // right brow 
+        ctx.beginPath()
+        ctx.moveTo(w+120, h-80)
+        ctx.quadraticCurveTo(w+100,h-110,w+80,h-80);
+        ctx.lineWidth = 4;
+        ctx.strokeStyle='brown'
+        ctx.stroke();
+        
+
     </script>
 </body>
 </html>

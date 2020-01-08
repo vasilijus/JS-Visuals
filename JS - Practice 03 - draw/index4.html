@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+            body {background: #333; color: #fff; display: flex; flex-direction: column; align-items: center;
+                justify-content: center; min-height:100vh; margin:0;}
+            #canvas { background: #ffb; border-radius: 5px;}
+            #source { display:none;}
+    </style>
+</head>
+<body>
+    <a href="./index.html">
+        <input type="button" value="Page 1" onclick="windows.location = 'index2.html'" />
+    </a>
+    <a href="./smile.html">
+        <input type="button" value="Smile" onclick="windows.location = 'index2.html'" />
+    </a>
+    <h1>Canvas Draw Image</h1>
+        <canvas id="canvas" height="490" width="515"></canvas>
+        <img src="char.png" width="50" height="50" alt="character" id="source">
+    <script>
+        var canvas = document.getElementById('canvas')
+        var ctx = canvas.getContext('2d')
+     
+        var image = document.getElementById('source');
+            image.onload = update
+
+        const player = {
+            w:50,
+            h:50,
+            x: 100,
+            y: 100,
+            speed: 5,
+            mx: 0,
+            my: 0
+        }
+
+        function drawPlayer() {
+            ctx.drawImage(image, player.x, player.y, player.w, player.h)
+        }
+        function newPos() {
+            player.x += player.mx;
+            player.y += player.my
+        }
+        function detectWall() {
+            if (player.x < canvas.clientLeft) { player.x = 0; } // left
+            if (player.x+player.w > canvas.width) {player.x = canvas.width - player.w} //right
+            if (player.y < canvas.clientTop ) { player.y = 0; } // top
+            if (player.y+player.h > canvas.height) {player.y = canvas.height - player.h} // Bottom
+        }
+
+        function clear() {
+            ctx.clearRect(0,0,canvas.width, canvas.height);
+        }
+        
+        function update(){
+            clear();
+            
+            drawPlayer();
+            newPos();
+
+            detectWall()
+            requestAnimationFrame(update);
+            // console.log('asd')
+        }
+        update();
+        
+        document.addEventListener('keydown', function(e){
+            // console.log(e)
+            switch(e.keyCode) {
+                case 37:
+                    moveLeft()  // left
+                    break;
+                case 38:
+                    moveUp()    // up
+                    break;
+                case 39:
+                    moveRight() // right
+                    break;
+                case 40:
+                    moveDown()  // down
+                    break;
+            }
+        })
+        document.addEventListener('keyup', function(e) {
+            if( 
+                e.keyCode == 37 ||
+                e.keyCode == 38 ||
+                e.keyCode == 39 ||
+                e.keyCode == 40
+            ) {
+                player.mx = 0;
+                player.my = 0
+            }
+        })
+
+        function moveLeft() { player.mx = -player.speed }
+        function moveUp()   { player.my = -player.speed }
+        function moveRight(){ player.mx = +player.speed }
+        function moveDown() { player.my = +player.speed }
+
+    </script>
+</body>
+</html>

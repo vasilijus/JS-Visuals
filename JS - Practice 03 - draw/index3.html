@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+</head>
+<body style="background:purple;">
+    <a href="./index.html">
+        <input type="button" value="Page 1" onclick="windows.location = 'index2.html'" />
+    </a>
+    <a href="./index4.html">
+        <input type="button" value="Page 4" onclick="windows.location = 'index2.html'" />
+    </a><br>
+    <a href="./smile.html">
+        <input type="button" value="Smile" onclick="windows.location = 'index2.html'" />
+    </a>
+    <h1>Canvas animate cirle</h1>
+    <canvas id="canvas" height="600" width="800"></canvas>
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        canvas.fill = 'white'
+        var circle = {
+            x: 200,
+            y: 200,
+            r: 30,
+            mx: 5,
+            my: 5
+        }
+        function drawCircle() {
+            ctx.beginPath()
+            ctx.arc(circle.x,circle.y,circle.r, 0, Math.PI * 2)
+            ctx.fillStyle='red'
+            ctx.fill();
+        }
+        function update() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            drawCircle();
+            // change position
+            circle.x += circle.mx;
+            circle.y += circle.my;
+            if(circle.x+circle.r > canvas.width || circle.x-circle.r < canvas.clientLeft) {
+                circle.mx *= -1;
+            }
+            if(circle.y+circle.r > canvas.height || circle.y-circle.r < canvas.clientTop) {
+                circle.my *= -1;
+            }
+
+            requestAnimationFrame(update);
+        }
+        update();
+        console.log(canvas)
+        console.log(circle)
+
+    </script>
+</body>
+</html>
