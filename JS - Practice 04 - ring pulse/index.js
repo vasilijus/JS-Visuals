@@ -9,10 +9,12 @@
     }
     init();
 
-    const numOfRings    = 1;
-    let angleStart      = 0;
+    const numOfRings        = 3;
+    const ringRadiusOffset  = 7;
+    let angleStart          = 0;
     function updateRings() {                            // Step 4
         for ( let i = 0; i < numOfRings ; i++ ) {
+            
             drawRing();
         }
         angleStart++;
@@ -53,6 +55,7 @@
     }
 
     function loop() {                                   // Step 3
+        updateRings();
         canvas.width |= 0; // ctx.clearRect(0, 0, canvas.width, canvas.height) //4
         drawRing() // 2
         requestAnimationFrame(loop); // 1
