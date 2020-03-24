@@ -4,13 +4,22 @@
     w       = canvas.width = innerWidth,
     h       = canvas.height = innerHeight,
     particles   = [],
+    // properties  = {
+    //     bgColor             : 'rgba(17,17,19,1)',
+    //     particleColor       : 'rgba(255,40,40,1)',
+    //     particleRadius      : 2.5,
+    //     particleCount       : 50,
+    //     particleMaxVelocity : 0.3,
+    //     lineLength          : 80,
+    //     particleLife        : 6,
+    // }
     properties  = {
         bgColor             : 'rgba(17,17,19,1)',
         particleColor       : 'rgba(255,40,40,1)',
-        particleRadius      : 2.5,
+        particleRadius      : 4.5,
         particleCount       : 50,
-        particleMaxVelocity : 0.3,
-        lineLength          : 80,
+        particleMaxVelocity : 1.3,
+        lineLength          : 200,
         particleLife        : 6,
     }
 
