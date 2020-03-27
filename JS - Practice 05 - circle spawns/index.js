@@ -1,88 +1,88 @@
-( () => {
+// ( () => {
 
-    const config = {
-        dotMinRad   : 6,
-        dotMaxRad   : 20,
-        massFactor  : 0.002,
-        defColor    : `rgba(250,30,30,0.60)`,
-    }
+//     const config = {
+//         dotMinRad   : 6,
+//         dotMaxRad   : 20,
+//         massFactor  : 0.002,
+//         defColor    : `rgba(250,30,30,0.60)`,
+//     }
 
-    const TWO_PI = 2 * Math.PI;
-    const canvas = document.querySelector('canvas');
-    const ctx    = canvas.getContext("2d");
+//     const TWO_PI = 2 * Math.PI;
+//     const canvas = document.querySelector('canvas');
+//     const ctx    = canvas.getContext("2d");
 
-    let w, h, mouse, dots;
+//     let w, h, mouse, dots;
 
-    class Dot {
-        constructor() {
-            this.pos = { 
-                x: mouse.x,
-                y: mouse.y
-            }
-            this.vel = {
-                x: 0, y: 0
-            }
-            this.rad = {
-                random(config.dotMinRad, config.dotMaxRad);
-            }
-            this.mass= this.rad * config.massFactor; 
-            this.color  = config.defColor;
-        }
-        function draw() {
-            createCircle(this.pos.x, this.pos.y, this.rad, true, this.color );
-            createCircle(this.pos.x, this.pos.y, this.rad, false, config.defColor );
-        }
-    }
+//     class Dot {
+//         constructor() {
+//             this.pos = { 
+//                 x: mouse.x,
+//                 y: mouse.y
+//             }
+//             this.vel = {
+//                 x: 0, y: 0
+//             }
+//             this.rad = {
+//                 random(config.dotMinRad, config.dotMaxRad);
+//             }
+//             this.mass= this.rad * config.massFactor; 
+//             this.color  = config.defColor;
+//         }
+//         function draw() {
+//             createCircle(this.pos.x, this.pos.y, this.rad, true, this.color );
+//             createCircle(this.pos.x, this.pos.y, this.rad, false, config.defColor );
+//         }
+//     }
 
-    function createCircle(x, y, rad, fill, color) {
-        ctx.fillStyle = ctx.strokeStyle = color;
-        ctx.beginPath();
-        ctx.arc(x, y, rad, 0, TWO_PI );
-        ctx.closePath();
-        fill ? ctx.fill() : ctx.stroke();
-    }
+//     function createCircle(x, y, rad, fill, color) {
+//         ctx.fillStyle = ctx.strokeStyle = color;
+//         ctx.beginPath();
+//         ctx.arc(x, y, rad, 0, TWO_PI );
+//         ctx.closePath();
+//         fill ? ctx.fill() : ctx.stroke();
+//     }
 
-    function random(min, max) {
-        return Math.random() * (max - min) + min;
-    }
+//     function random(min, max) {
+//         return Math.random() * (max - min) + min;
+//     }
 
-    function init() {
-        w = canvas.width = innerWidth;
-        h = canvas.height= innerHeight;
+//     function init() {
+//         w = canvas.width = innerWidth;
+//         h = canvas.height= innerHeight;
 
-        mouse = { 
-            x: w /2 ,
-            y: h / 2, 
-            down: false 
-        }
-        dots = [];
+//         mouse = { 
+//             x: w /2 ,
+//             y: h / 2, 
+//             down: false 
+//         }
+//         dots = [];
 
-    }
+//     }
 
-    function loop() {
-        ctx.clearRect(0, 0, w, h);
+//     function loop() {
+//         ctx.clearRect(0, 0, w, h);
 
-        if ( mouse.down ) { dots.push( new Dot() ); }
-        dots.map( el = el.draw() );
+//         if ( mouse.down ) { dots.push( new Dot() ); }
+//         dots.map( el = el.draw() );
 
-        window.requestAnimationFrame(loop);
-    }
+//         window.requestAnimationFrame(loop);
+//     }
 
-    init();
-    loop();
+//     init();
+//     loop();
 
-    function setPos({LayerX, LayerY}) {
-        [mouse.x, mouse.y] = [LayerX, LayerY];
-    }
+//     function setPos({LayerX, LayerY}) {
+//         [mouse.x, mouse.y] = [LayerX, LayerY];
+//     }
 
-    function isDown() {
-        mouse.down = !mouse.down;
-    }
-
-
-    canvas.addEventListener('mousemove', setPos );
-    canvas.addEventListener('mousedown', isDown );
-    canvas.addEventListener('mouseup', isDown );
+//     function isDown() {
+//         mouse.down = !mouse.down;
+//     }
 
 
-})();
+//     canvas.addEventListener('mousemove', setPos );
+//     canvas.addEventListener('mousedown', isDown );
+//     canvas.addEventListener('mouseup', isDown );
+
+
+// })();
