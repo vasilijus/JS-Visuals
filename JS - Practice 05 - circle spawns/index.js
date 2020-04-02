@@ -27,13 +27,13 @@
         }
     }
 
-    function createCircle(x, y, rad, fill, color) {
-        ctx.fillStyle = ctx.strokeStyle = color;
-        ctx.beginPath();
-        ctx.arc(x, y, rad, 0, TWO_PI );
-        ctx.closePath();
-        fill ? ctx.fill() : ctx.stroke();
-    }
+    // function createCircle(x, y, rad, fill, color) {
+    //     ctx.fillStyle = ctx.strokeStyle = color;
+    //     ctx.beginPath();
+    //     ctx.arc(x, y, rad, 0, TWO_PI );
+    //     ctx.closePath();
+    //     fill ? ctx.fill() : ctx.stroke();
+    // }
 
     function random(min, max) {
         return Math.random() * (max - min) + min;
