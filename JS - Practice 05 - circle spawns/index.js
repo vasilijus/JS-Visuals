@@ -8,12 +8,14 @@
     }
 
     const TWO_PI = 2 * Math.PI;
+
     const canvas = document.querySelector('canvas');
     const ctx    = canvas.getContext("2d");
 
     let w, h, mouse, dots; // dots = []
 
     class Dot {
+       
         constructor() {
             this.pos    = { x: mouse.x, y: mouse.y }
             this.vel    = { x: 0, y: 0 }
@@ -27,27 +29,32 @@
         }
     }
 
-    // function createCircle(x, y, rad, fill, color) {
-    //     ctx.fillStyle = ctx.strokeStyle = color;
-    //     ctx.beginPath();
-    //     ctx.arc(x, y, rad, 0, TWO_PI );
-    //     ctx.closePath();
-    //     fill ? ctx.fill() : ctx.stroke();
-    // }
+    function createCircle(x, y, rad, fill, color) {
+        console.log("createCircle-start")
+        ctx.fillStyle = ctx.strokeStyle = color;
+        ctx.beginPath();
+        ctx.arc(x, y, rad, 0, TWO_PI );
+        ctx.closePath();
+        fill ? ctx.fill() : ctx.stroke();
+    }
 
     function random(min, max) {
+        console.log("random-start")
         return Math.random() * (max - min) + min;
     }
 
     function init() {
-        w = canvas.width = innerWidth;
-        h = canvas.height= innerHeight;
+        console.log("init-start")
+
+        w = canvas.width    = innerWidth;
+        h = canvas.height   = innerHeight;
 
         mouse = { 
-            x: w /2 ,
+            x: w / 2,
             y: h / 2, 
             down: false 
         }
+
         dots = [];
 
     }
@@ -69,10 +76,13 @@
     loop();
 
     function setPos({LayerX, LayerY}) {
+
         [mouse.x, mouse.y] = [LayerX, LayerY];
     }
 
     function isDown() {
+        console.log("isDown-start")
+
         mouse.down = !mouse.down;
     }
 
