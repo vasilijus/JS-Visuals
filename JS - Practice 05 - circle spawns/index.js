@@ -30,7 +30,7 @@
     }
 
     function createCircle(x, y, rad, fill, color) {
-        console.log("createCircle-start")
+        // console.log("createCircle-start")
         ctx.fillStyle = ctx.strokeStyle = color;
         ctx.beginPath();
         ctx.arc(x, y, rad, 0, TWO_PI );
@@ -82,7 +82,7 @@
 
     function isDown() {
         console.log("isDown-start")
-
+        console.log(mouse.down)
         mouse.down = !mouse.down;
     }
 
