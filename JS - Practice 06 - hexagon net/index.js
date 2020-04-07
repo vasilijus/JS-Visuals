@@ -17,7 +17,7 @@
     const config = {
         bgFillColor : `rgba(50,50,50,.05)`,
         dirsCount   : 6,
-        stepsToTurn : 20,
+        stepsToTurn : 14,
     }
 
     function drawRect(color, x, y, w, h, shadowColor, shadowBlur) {
@@ -51,7 +51,9 @@
 
         changeDir() {
             if( this.step % config.stepsToTurn === 0 ) {
-                this.dir = Math.random * 6 | 0;
+                console.log('change dir')
+                this.dir = Math.random() * 6 | 0;
+                // this.dir = Math.random > .5 ? (this.dir + 1) % config.dirsCount : (this.dir + config.dirsCount- 1) % config.dirsCount ;
             }
         }
     }
@@ -70,7 +72,7 @@
 
 
     function loop() {
-        drawRect(config.bgFillColor, 0, 0, cw, ch);
+        // drawRect(config.bgFillColor, 0, 0, cw, ch);
         
         dot.redrawDot();        
         dot.moveDot();
