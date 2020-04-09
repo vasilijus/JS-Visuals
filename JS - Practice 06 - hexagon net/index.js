@@ -15,11 +15,14 @@
     window.addEventListener('resize', resizeCanvas() );
 
     const config = {
+        hue         : `0`,
         bgFillColor : `rgba(50,50,50,.05)`,
         dirsCount   : 6,
-        stepsToTurn : 50,
+        stepsToTurn : 15,
         dotSize     : 2,
         dotsCount   : 300,
+        dotVelocity : 2,
+        distance    : 70,
     }
 
     function drawRect(color, x, y, w, h, shadowColor, shadowBlur) {
@@ -32,29 +35,37 @@
     class Dot {
         constructor() {
             this.pos    = { x: cx, y: cy };
-            this.dir    = Math.random() * 6 | 0;
+            this.dir    = (Math.random() * 3 | 0) * 2; // instead of shooting in 6 directions,  we put them in 3
             this.step   = 0;
         }
 
         redrawDot() {
-            let color   = `red`;
+            let blur = 4;
+            let color   = `hsl(${ config.hue }, 100%, 50%)`;
             let size    = config.dotSize;
             let x       = this.pos.x - size / 2;
             let y       = this.pos.y - size / 2;
 
-            drawRect(color, x, y, size, size);
+            drawRect(color, x, y, size, size, color, blur);
         }
 
         moveDot() {
             this.step++;
-            this.pos.x  += dirsList[this.dir].x;
-            this.pos.y  += dirsList[this.dir].y;
+            this.pos.x  += dirsList[this.dir].x * config.dotVelocity;
+            this.pos.y  += dirsList[this.dir].y * config.dotVelocity;
         }
 
         changeDir() {
             if( this.step % config.stepsToTurn === 0 ) {
-                console.log('change dir')
+                // console.log('change dir')
                 this.dir = Math.random() > 0.5 ? (this.dir + 1) % config.dirsCount : (this.dir + config.dirsCount - 1) % config.dirsCount;
+            }
+        }
+
+        killDot(id) {
+            let percent = Math.random() * Math.exp(this.step / config.distance);
+            if( percent > 100 ) {
+                dotsList.splice(id, 1);
             }
         }
     }
@@ -74,16 +85,18 @@
     function addDots() {
         if( dotsList.length < config.dotsCount ) {
             dotsList.push( new Dot() );
-            console.log(dotsList.length);
+            config.hue = (config.hue + 1) % 360;
+            // console.log(dotsList.length);
         }
     }
     
 
     function refreshDots() {
-        dotsList.forEach(el => {
+        dotsList.forEach(( el, id )=> {
             el.moveDot();
             el.redrawDot();
             el.changeDir();
+            el.killDot(id);
         })
     }
 
@@ -91,13 +104,9 @@
 
 
     function loop() {
-        // debugger
         drawRect(config.bgFillColor, 0, 0, cw, ch);
         addDots();
         refreshDots();
-        // dot.redrawDot();        
-        // dot.moveDot();
-        // dot.changeDir();
 
         requestAnimationFrame(loop);
     }
