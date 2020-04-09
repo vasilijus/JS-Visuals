@@ -17,7 +17,9 @@
     const config = {
         bgFillColor : `rgba(50,50,50,.05)`,
         dirsCount   : 6,
-        stepsToTurn : 54,
+        stepsToTurn : 50,
+        dotSize     : 2,
+        dotsCount   : 300,
     }
 
     function drawRect(color, x, y, w, h, shadowColor, shadowBlur) {
@@ -36,7 +38,7 @@
 
         redrawDot() {
             let color   = `red`;
-            let size    = 12;
+            let size    = config.dotSize;
             let x       = this.pos.x - size / 2;
             let y       = this.pos.y - size / 2;
 
@@ -67,15 +69,35 @@
     }
     createDirs();
 
-    let dot = new Dot();
+
+    let dotsList = [];
+    function addDots() {
+        if( dotsList.length < config.dotsCount ) {
+            dotsList.push( new Dot() );
+            console.log(dotsList.length);
+        }
+    }
+    
+
+    function refreshDots() {
+        dotsList.forEach(el => {
+            el.moveDot();
+            el.redrawDot();
+            el.changeDir();
+        })
+    }
+
+    // let dot = new Dot();
 
 
     function loop() {
-        // drawRect(config.bgFillColor, 0, 0, cw, ch);
-        
-        dot.redrawDot();        
-        dot.moveDot();
-        dot.changeDir();
+        // debugger
+        drawRect(config.bgFillColor, 0, 0, cw, ch);
+        addDots();
+        refreshDots();
+        // dot.redrawDot();        
+        // dot.moveDot();
+        // dot.changeDir();
 
         requestAnimationFrame(loop);
     }
