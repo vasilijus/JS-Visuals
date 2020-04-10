@@ -18,25 +18,28 @@
         hue         : `0`,
         bgFillColor : `rgba(50,50,50,.05)`,
         dirsCount   : 6,
-        stepsToTurn : 15,
+        stepsToTurn : 10,
         dotSize     : 3,
         dotsCount   : 300,
         dotVelocity : 2, //  dot movesdistance
-        distance    : 70, // dot dies
-        gradientlen : 10
+        distance    : 170, // dot dies
+        gradientlen : 15,
+        gridAngle   : 45,
     }
 
-    function drawRect(color, x, y, w, h, shadowColor, shadowBlur) {
-        ctx.shadowColor     = shadowColor || 'black';
-        ctx.shadowBlur      = shadowBlur  || 1 ;
-        ctx.fillStyle   = color;
+    function drawRect(color, x, y, w, h, shadowColor, shadowBlur, gco) {
+        ctx.globalCompositeOperation    = gco;
+        ctx.shadowColor                 = shadowColor || 'black';
+        ctx.shadowBlur                  = shadowBlur  || 1 ;
+        ctx.fillStyle                   = color;
         ctx.fillRect(x, y, w, h);
     }
 
     class Dot {
         constructor() {
-            this.pos    = { x: cx, y: cy };
-            this.dir    = (Math.random() * 3 | 0) * 2; // instead of shooting in 6 directions,  we put them in 3
+            this.pos    = { x: cx, y: cy }; // ch
+            // instead of shooting in 6 directions,  we put them in 3
+            this.dir    = config.dirsCount === 6 ? (Math.random() * 3 | 0) * 2 : Math.random() * config.dirsCount | 0;
             this.step   = 0;
         }
 
@@ -55,7 +58,7 @@
         moveDot() {
             this.step++;
             this.pos.x  += dirsList[this.dir].x * config.dotVelocity;
-            this.pos.y  += dirsList[this.dir].y * config.dotVelocity;
+            this.pos.y  += dirsList[this.dir].y * config.dotVelocity; // config.dotVelocity -1
         }
 
         changeDir() {
@@ -76,8 +79,9 @@
     let dirsList = [];
     function createDirs() {
         for (let i = 0; i < 360; i += 360 / config.dirsCount) {
-            let x = Math.cos(i * Math.PI / 180);
-            let y = Math.sin(i * Math.PI / 180);
+            let angle = config.gridAngle + i;
+            let x = Math.cos(angle * Math.PI / 180);
+            let y = Math.sin(angle * Math.PI / 180);
             dirsList.push({x: x, y: y});
         }
     }
@@ -107,7 +111,7 @@
 
 
     function loop() {
-        drawRect(config.bgFillColor, 0, 0, cw, ch);
+        drawRect(config.bgFillColor, 0, 0, cw, ch, 0, 0, `normal`);
         addDots();
         refreshDots();
 
