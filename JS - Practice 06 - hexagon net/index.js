@@ -19,10 +19,11 @@
         bgFillColor : `rgba(50,50,50,.05)`,
         dirsCount   : 6,
         stepsToTurn : 15,
-        dotSize     : 2,
+        dotSize     : 3,
         dotsCount   : 300,
-        dotVelocity : 2,
-        distance    : 70,
+        dotVelocity : 2, //  dot movesdistance
+        distance    : 70, // dot dies
+        gradientlen : 10
     }
 
     function drawRect(color, x, y, w, h, shadowColor, shadowBlur) {
@@ -40,9 +41,11 @@
         }
 
         redrawDot() {
-            let blur = 4;
-            let color   = `hsl(${ config.hue }, 100%, 50%)`;
-            let size    = config.dotSize;
+            let xy      = Math.abs(this.pos.x - cx) + Math.abs(this.pos.y - cy);
+            let makeHue = (config.hue + xy / config.gradientlen) % 360;
+            let color   = `hsl(${ makeHue }, 100%, 50%)`;
+            let size    = config.dotSize - Math.sin(xy / 9) * 2 - Math.sin(xy / 2);
+            let blur    = config.dotSize - Math.sin(xy / 8) * 2 - Math.sin(xy / 2);
             let x       = this.pos.x - size / 2;
             let y       = this.pos.y - size / 2;
 
