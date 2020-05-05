@@ -1,9 +1,39 @@
+const config = {
+    waveSpeed   : 1,
+}
+
+class WaveNoise {
+    constructor() {
+        this.waveSet = [];
+    }
+    addWaves( requiredWaves ) {
+        for ( let i = 0; i < requiredWaves; i++ ) {
+            let randomAngle = Math.random() * 360;
+            this.waveSet.push(randomAngle);
+        }
+    }
+    getWave() {
+        let blendedWave = 0;
+        for ( let e of this.waveSet ) {
+            blendedWave += Math.sin( e / 180 * Math.PI );
+        }
+        return (blendedWave / this.waveSet.length + 1) / 2; // result = 0 - 1 
+    }
+    update() {
+        this.waveSet.forEach( (e, i) => {
+            let r = Math.random() * (i + 1) * config.waveSpeed;
+            this.waveSet[i] = (e + r) % 360;
+        })
+    }
+}
 
 class Animation {
     constructor() {
         this.canvas     = null;
         this.context    = null;
         this.size       = { w: 0, h: 0, cx: 0, cy: 0 }
+        this.controls   = [];
+        this.controlsNum= 3; // x1, y1 ,x2
     }
 
     init() {
@@ -24,6 +54,7 @@ class Animation {
         this.size.cx= this.size.w / 2;
         this.size.cy= this.size.h / 2;
     }
+    createControls() {} // STOPED HERE
     updateCurves() {
         let curveParam = {
             startX      : 0,
