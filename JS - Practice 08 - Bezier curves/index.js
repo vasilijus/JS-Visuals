@@ -1,3 +1,4 @@
+
 class Animation {
     constructor() {
         this.canvas     = null;
@@ -7,6 +8,7 @@ class Animation {
 
     init() {
         this.createCanvas();
+        this.updateAnimation();
     }
     createCanvas() {
         this.canvas     = document.createElement('canvas');
@@ -22,7 +24,7 @@ class Animation {
         this.size.cx= this.size.w / 2;
         this.size.cy= this.size.h / 2;
     }
-    UpdateCurves() {
+    updateCurves() {
         let curveParam = {
             startX      : 0,
             startY      : 0,
@@ -33,14 +35,25 @@ class Animation {
             endX        : this.size.w,
             endY        : this.size.h,
         }
+        console.log(curveParam);
         this.drawCurve( curveParam );
+    }
+    drawCurve({ startX, startY, control_X1, control_Y1, control_X2, control_Y2, endX, endY }) {
+        this.context.strokeStyle = `white`;
+        this.context.beginPath();
+        this.context.moveTo(startX, startY);
+        this.context.bezierCurveTo(control_X1, control_Y1, control_X2, control_Y2, endX, endY);
+        this.context.stroke();
+    }
+    updateAnimation() {
+        this.updateCurves();
     }
 }
 
-document.addEventListener('DOMContentLoaded', function(){
+// document.addEventListener('DOMContentLoaded', function(){
     var Anim =  new Animation();  
     Anim.init();
-})
+// })
 
 // window.onload = () => {
 //     new Animation().init() // issue
