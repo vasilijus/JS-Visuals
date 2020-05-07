@@ -67,7 +67,7 @@ class Animation {
 
     updateCurves() {
         let c = this.controls;
-        console.log( c );
+        // console.log( c );
         let _controlX1 = c[0].getWave() * this.size.w;
         let curveParam = {
             startX      : 0,
@@ -79,7 +79,7 @@ class Animation {
             endX        : this.size.w,
             endY        : this.size.h,
         }
-        console.log(curveParam);
+        // console.log(curveParam);
         this.drawCurve( curveParam );
     }
 
@@ -92,8 +92,19 @@ class Animation {
         this.context.bezierCurveTo(control_X1, control_Y1, control_X2, control_Y2, endX, endY);
         this.context.stroke();
     }
+    updateCanvas() {
+        this.context.fillStyle = `rgb(22,22,25)`;
+        this.context.fillRect(0, 0, this.size.w, this.size.h);
+    }
+    updateControls() {
+        this.controls.forEach( e => e.update() );
+    }
     updateAnimation() {
+        this.updateCanvas();
         this.updateCurves();
+        
+        window.requestAnimationFrame( () => { this.updateAnimation } );
+
     }
 }
 
