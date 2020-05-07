@@ -1,5 +1,6 @@
 const config = {
     waveSpeed   : 1,
+    wavesToBlend    : 4,
 }
 
 class WaveNoise {
@@ -7,7 +8,7 @@ class WaveNoise {
         this.waveSet = [];
     }
     addWaves( requiredWaves ) {
-        for ( let i = 0; i < requiredWaves; i++ ) {
+        for ( let i = 0; i < requiredWaves; ++i ) {
             let randomAngle = Math.random() * 360;
             this.waveSet.push(randomAngle);
         }
@@ -29,15 +30,16 @@ class WaveNoise {
 
 class Animation {
     constructor() {
-        this.canvas     = null;
-        this.context    = null;
-        this.size       = { w: 0, h: 0, cx: 0, cy: 0 }
-        this.controls   = [];
-        this.controlsNum= 3; // x1, y1 ,x2
+        this.canvas         = null;
+        this.context        = null;
+        this.size           = { w: 0, h: 0, cx: 0, cy: 0 };
+        this.controls       = [];
+        this.controlsNum    = 3; // x1, y1 ,x2
     }
 
     init() {
         this.createCanvas();
+        this.createControls();
         this.updateAnimation();
     }
     createCanvas() {
@@ -54,12 +56,23 @@ class Animation {
         this.size.cx= this.size.w / 2;
         this.size.cy= this.size.h / 2;
     }
-    createControls() {} // STOPED HERE
+
+    createControls() {
+        for ( let i = 0; i < this.controlsNum; ++i ) {
+            let control = new WaveNoise();
+            control.addWaves( config.wavesToBlend );
+            this.controls.push( control );
+        }
+    } // STOPED HERE
+
     updateCurves() {
+        let c = this.controls;
+        console.log( c );
+        let _controlX1 = c[0].getWave() * this.size.w;
         let curveParam = {
             startX      : 0,
             startY      : 0,
-            control_X1  : this.size.cx,
+            control_X1  : _controlX1,
             control_Y1  : 0,
             control_X2  : this.size.cx,
             control_Y2  : this.size.h,
@@ -69,6 +82,9 @@ class Animation {
         console.log(curveParam);
         this.drawCurve( curveParam );
     }
+
+    // Nado zaciklit updateAnimation
+
     drawCurve({ startX, startY, control_X1, control_Y1, control_X2, control_Y2, endX, endY }) {
         this.context.strokeStyle = `white`;
         this.context.beginPath();
