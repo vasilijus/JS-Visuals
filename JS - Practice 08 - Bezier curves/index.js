@@ -108,10 +108,10 @@ class Animation {
     }
 }
 
-// document.addEventListener('DOMContentLoaded', function(){
+document.addEventListener('DOMContentLoaded', function(){
     var Anim =  new Animation();  
     Anim.init();
-// })
+})
 
 // window.onload = () => {
 //     new Animation().init() // issue
