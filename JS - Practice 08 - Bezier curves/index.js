@@ -102,8 +102,8 @@ class Animation {
     updateAnimation() {
         this.updateCanvas();
         this.updateCurves();
-        
-        window.requestAnimationFrame( () => { this.updateAnimation } );
+        this.updateControls();
+        window.requestAnimationFrame( () => { this.updateAnimation() } );
 
     }
 }
