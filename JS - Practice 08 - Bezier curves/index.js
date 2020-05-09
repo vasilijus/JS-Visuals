@@ -1,6 +1,7 @@
 const config = {
     waveSpeed   : 1,
-    wavesToBlend    : 4,
+    wavesToBlend    : 3,
+    curvesNum       : 20,
 }
 
 class WaveNoise {
@@ -58,7 +59,7 @@ class Animation {
     }
 
     createControls() {
-        for ( let i = 0; i < this.controlsNum; ++i ) {
+        for ( let i = 0; i < this.controlsNum + config.curvesNum ; ++i ) {
             let control = new WaveNoise();
             control.addWaves( config.wavesToBlend );
             this.controls.push( control );
@@ -69,18 +70,25 @@ class Animation {
         let c = this.controls;
         // console.log( c );
         let _controlX1 = c[0].getWave() * this.size.w;
-        let curveParam = {
-            startX      : 0,
-            startY      : 0,
-            control_X1  : _controlX1,
-            control_Y1  : 0,
-            control_X2  : this.size.cx,
-            control_Y2  : this.size.h,
-            endX        : this.size.w,
-            endY        : this.size.h,
+        let _controlY1 = c[1].getWave() * this.size.h;
+        let _controlX2 = c[2].getWave() * this.size.w;
+        for ( let i = 0; i < config.curvesNum; ++i ) {
+            let _controlY2 = c[3+i].getWave() * this.size.h;
+
+            let curveParam = {
+                startX      : 0,
+                startY      : 0,
+                control_X1  : _controlX1,
+                control_Y1  : _controlY1,
+                control_X2  : _controlX2,
+                control_Y2  : _controlY2,
+                endX        : this.size.w,
+                endY        : this.size.h,
+            }
+            // console.log(curveParam);
+            this.drawCurve( curveParam );
         }
-        // console.log(curveParam);
-        this.drawCurve( curveParam );
+       
     }
 
     // Nado zaciklit updateAnimation
